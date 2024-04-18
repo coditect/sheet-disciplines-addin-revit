@@ -1,0 +1,12 @@
+<Project Sdk="WixToolset.Sdk/5.0.0">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <SuppressValidation>true</SuppressValidation>
+    <SuppressIces>ICE38</SuppressIces>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <SuppressValidation>true</SuppressValidation>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SheetDisciplines\SheetDisciplines.csproj" />
+  </ItemGroup>
+</Project>

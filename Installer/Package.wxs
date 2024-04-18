@@ -1,0 +1,43 @@
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+  <Package Name="Sheet Disciplines Add-in for Revit" Manufacturer="com.nicholasorenrawlings" Version="0.2.0.0" Scope="perUser" UpgradeCode="3570dddd-9591-4d11-b388-328a3a644796">
+    <MajorUpgrade DowngradeErrorMessage="!(loc.DowngradeError)" />
+    <MediaTemplate EmbedCab="yes" />
+
+    <!-- Common folder structure -->
+    <StandardDirectory Id="AppDataFolder">
+      <Directory Name="Autodesk">
+        <Directory Name="Revit">
+          <Directory Name="Addins" Id="ADDINS_FOLDER" />
+        </Directory>
+      </Directory>
+    </StandardDirectory>
+
+    <!-- Features -->
+    <?foreach YEAR in 2022 ?>
+
+      <!-- Feature-specific folders -->
+      <DirectoryRef Id="ADDINS_FOLDER">
+        <Directory Id="ADDINS_FOLDER_$(YEAR)" Name="$(YEAR)">
+          <Directory Id="PRODUCT_FOLDER_$(YEAR)" Name="SheetDisciplines" />
+        </Directory>
+      </DirectoryRef>
+
+      <!-- Feature -->
+      <Feature Id="Revit$(YEAR)" Title="Revit $(YEAR)">
+        <Component Id="Revit$(YEAR)_AddInManifest" Directory="ADDINS_FOLDER_2022">
+          <File Id="Revit$(YEAR)_AddInManifest_File" Source="SheetDisciplines.addin" />
+        </Component>
+        <Component Id="Revit$(YEAR)_DLL" Directory="PRODUCT_FOLDER_$(YEAR)">
+          <File Id="Revit$(YEAR)_DLL_File" Source="SheetDisciplines.dll" />
+        </Component>
+        <Component Id="Revit$(YEAR)_DragDropDLL" Directory="PRODUCT_FOLDER_$(YEAR)">
+          <File Id="Revit$(YEAR)_DragDropDLL_File" Source="GongSolutions.WPF.DragDrop.dll" />
+        </Component>
+      </Feature>
+
+    <?endforeach?>
+
+    <!-- UI -->
+    
+  </Package>
+</Wix>

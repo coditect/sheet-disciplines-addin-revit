@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RevitAddIns>
+	<AddIn Type="Application">
+		<Name>Sheet Disciplines</Name>
+		<Assembly>SheetDisciplines/SheetDisciplines.dll</Assembly>
+		<AddInId>2154F8FC-3953-4E45-8B13-D28A838CB8E6</AddInId>
+		<FullClassName>SheetDisciplines.Application</FullClassName>
+		<VendorId>com.nicholasorenrawlings</VendorId>
+		<VendorDescription>Nicholas Rawlings</VendorDescription>
+	</AddIn>
+</RevitAddIns>
