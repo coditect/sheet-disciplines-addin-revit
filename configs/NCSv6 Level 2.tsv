@@ -1,0 +1,159 @@
+# Level 1 and 2 discipline designators as defined in the United States National CAD Standard v6
+
+G	General
+GI	General Information
+GC	General Contract
+GR	General Resource
+
+H	Hazardous Materials
+HA	Hazardous Materials Asbestos
+HC	Hazardous Materials Chemicals
+HL	Hazardous Materials Lead
+HP	Hazardous Materials PCB
+HR	Hazardous Materials Refrigerants
+
+V	Survey/Mapping
+VA	Survey/Mapping - Aerial
+VB	Survey/Mapping - Boundary
+VC	Survey/Mapping - Computated Points
+VF	Survey/Mapping - Field
+VI	Survey/Mapping - Digital
+VN	Survey/Mapping - Node Points
+VS	Survey/Mapping - Staked Points
+VU	Survey/Mapping - Utilities
+VL	Survey/Mapping - Land
+
+B	Geotechnical
+
+C	Civil
+CD	Civil Demolition
+CS	Civil Site
+CG	Civil Grading
+CT	Civil Transportation
+CP	Civil Paving
+CU	Civil Utilities
+CI	Civil Improvements
+CN	Civil Nodes
+
+L	Landscape
+LD	Landscape Demolition
+LS	Landscape Site
+LG	Landscape Grading
+LI	Landscape Irrigation
+LL	Landscape Lighting
+LP	Landscape Planting
+LR	Landscape Relocation
+
+S	Structural
+SD	Structural Demolition
+SS	Structural Site
+SB	Structural Substructure
+SF	Structural Framing
+
+A	Architectural
+AD	Architectural Demolition
+AS	Architectural Site
+AE	Architectural Elements
+AI	Architectural Interiors
+AG	Architectural Graphics
+AF	Architectural Finishes
+
+I	Interiors
+ID	Interior Demolition
+IN	Interior Design
+IF	Interior Furnishings
+IG	Interior Graphics
+
+Q	Equipment
+QA	Equipment Athletic
+QB	Equipment Bank
+QC	Equipment Dry Cleaning
+QD	Equipment Detention
+QE	Equipment Educational
+QF	Equipment Food Service
+QH	Equipment Hospital
+QL	Equipment Laboratory
+QM	Equipment Maintenance
+QP	Equipment Parking Lot
+QR	Equipment Retail
+QS	Equipment Site
+QT	Equipment Theatrical
+QV	Equipment Video/Photographic
+QY	Equipment Security
+
+F	Fire Protection
+FA	Fire Detection and Alarm
+FX	Fire Suppression
+
+P	Plumbing
+PD	Plumbing Demolition
+PS	Plumbing Site
+PL	Plumbing Fixtures
+PP	Plumbing Piping
+PQ	Plumbing Equipment
+
+D	Process
+DD	Process Demolition
+DS	Process Site
+DA	Process Airs
+DC	Process Chemicals
+DE	Process Electrical
+DG	Process Gases
+DI	Process Instrumentation
+DL	Process Liquids
+DM	Process HPM Gases
+DO	Process Oil
+DQ	Process Equipment
+DR	Process Drains and Reclaims
+DV	Process Vacuum
+DW	Process Waters
+DX	Process Exhaust
+DY	Process Slurry
+
+M	Mechanical
+MD	Mechanical Demolition
+MS	Mechanical Site
+MH	Mechanical HVAC
+MI	Mechanical Instrumentation
+MP	Mechanical Piping
+
+E	Electrical
+ED	Electrical Demolition
+ES	Electrical Site
+EI	Electrical Instrumentation
+EL	Electrical Lighting
+EP	Electrical Power
+ET	Electrical Telecommunication
+EY	Electrical Auxiliary Systems
+
+W	Distributed Energy
+WD	Distributed Energy Demolition
+WC	Distributed Energy Civil
+WI	Distributed Energy Interconnection
+WP	Distributed Energy Power
+WS	Distributed Energy Structural
+WT	Distributed Energy Telecommunication
+WY	Distributed Energy Auxiliary Systems
+
+T	Telecommunications
+TA	Telecommunications Audio Visual
+TC	Telecommunications Clock and Program
+TI	Telecommunications Intercom
+TM	Telecommunications Monitoring
+TN	Telecommunications Data Networks
+TT	Telecommunications Telephone
+TY	Telecommunications Security
+
+R	Resource
+RC	Resource Civil
+RS	Resource Structural
+RA	Resource Architectural
+RM	Resource Mechanical
+RE	Resource Electrical
+RR	Resource Real Estate
+
+X	Other Disciplines
+
+Z	Contractor/Shop Drawings
+
+O	Operations
