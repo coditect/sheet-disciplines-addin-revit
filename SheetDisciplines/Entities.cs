@@ -1,9 +1,11 @@
-﻿using Autodesk.Revit.DB.ExtensibleStorage;
+using Autodesk.Revit.DB.ExtensibleStorage;
 using Autodesk.Revit.DB;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Runtime.CompilerServices;
+using System.Text;
 
 namespace SheetDisciplines
 {
@@ -286,6 +288,46 @@ namespace SheetDisciplines
             defaultDisciplines.Add("Z", "Contractor/Shop Drawings");
             defaultDisciplines.Add("O", "Operations");
             return defaultDisciplines;
+        }
+
+        public void WriteFile(string path)
+        {
+            using (var writer = new StreamWriter(path, false, Encoding.UTF8, 1024))
+            {
+                foreach (var discipline in _list)
+                {
+                    writer.WriteLine(discipline.Designator + "\t" + discipline.Name);
+                }
+            }
+        }
+
+        public static DisciplineList FromFile(string path)
+        {
+            using (var reader = new StreamReader(path, Encoding.UTF8))
+            {
+                var list = new DisciplineList();
+                var line = reader.ReadLine();
+                var lineNumber = 0;
+
+                while (line != null)
+                {
+                    line = line.Trim();
+
+                    // ignore empty lines and lines that start with '#'
+                    if (line.Length > 0 && !line.StartsWith("#"))
+                    {
+                        var fields = line.Split(null, 2);
+                        if (fields.Length != 2 || fields[0].Length == 0 || fields[1].Length == 0)
+                        {
+                            throw new Exception($"Unable to parse line {lineNumber} of {path}");
+                        }
+                        list.Add(fields[0], fields[1].TrimStart());
+                    }
+                    line = reader.ReadLine();
+                    lineNumber++;
+                }
+                return list;
+            }
         }
     }
 }

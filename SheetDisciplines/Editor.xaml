@@ -1,16 +1,16 @@
-﻿<Window x:Class="SheetDisciplines.Editor"
+<Window x:Class="SheetDisciplines.Editor"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:dd="urn:gong-wpf-dragdrop"
-             xmlns:local="clr-namespace:SheetDisciplines"
              mc:Ignorable="d" 
-        Title="Edit Disciplines"
-        Width="400"
         Height="600"
         ShowInTaskbar="False"
-        WindowStartupLocation="CenterScreen" WindowStyle="ToolWindow">
+        Title="Edit Sheet Disciplines"
+        Width="400"
+        WindowStartupLocation="CenterOwner"
+        WindowStyle="ToolWindow">
     <DockPanel>
         <Grid DockPanel.Dock="Bottom" Background="#FFF0F0F0">
             <Grid.ColumnDefinitions>
@@ -20,8 +20,8 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <Button Content="Import..." Grid.Column="0" MinWidth="60" Margin="10" />
-            <Button Content="Export..." Grid.Column="1" MinWidth="60" Margin="0,10" />
+            <Button Click="Import" Content="Import..." Grid.Column="0" MinWidth="60" Margin="10" />
+            <Button Click="Export" Content="Export..." Grid.Column="1" MinWidth="60" Margin="0,10" />
             <Button Click="Save" Content="OK" Grid.Column="3" MinWidth="60" Margin="0,10" />
             <Button Click="Cancel" Content="Cancel" IsCancel="True" MinWidth="60" Grid.Column="4" Margin="10" />
         </Grid>

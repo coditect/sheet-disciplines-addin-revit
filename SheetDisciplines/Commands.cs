@@ -1,4 +1,4 @@
-﻿using Autodesk.Revit.DB;
+using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 using System;
 
@@ -17,7 +17,7 @@ namespace SheetDisciplines
                     t.Start();
 
                     var config = new Configuration(document);
-                    var editor = new Editor(config);
+                    var editor = new Editor(data.Application, config);
                     var response = editor.ShowDialog();
 
                     if (response == true)

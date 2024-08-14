@@ -1,35 +1,48 @@
-﻿using System.Collections.ObjectModel;
+using System;
+using System.Collections.ObjectModel;
 using System.Windows;
+using System.Windows.Interop;
+using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 using GongSolutions.Wpf.DragDrop;
 
 namespace SheetDisciplines
 {
     /// <summary>
-    /// Interaction logic for UserControl1.xaml
+    /// Interaction logic for Editor.xaml
     /// </summary>
     public partial class Editor : Window, IDropTarget
     {
         Configuration _config;
         Settings _settings;
 
-        public Editor(Configuration config)
+        public Editor(UIApplication app, Configuration config)
         {
             InitializeComponent();
+            Owner = HwndSource.FromHwnd(app.MainWindowHandle).RootVisual as Window;
             _config = config;
             _settings = _config.GetSettings();
-            DisciplineTable.ItemsSource = new ObservableCollection<Discipline>(_settings.Disciplines.GetList());
+            AssignDisciplineListToTable(_settings.Disciplines);
         }
 
-        public void Save(object sender, RoutedEventArgs e)
+        void AssignDisciplineListToTable(DisciplineList disciplines)
+        {
+            DisciplineTable.ItemsSource = new ObservableCollection<Discipline>(disciplines.GetList());
+        }
+
+        DisciplineList ExtractDisciplineListFromTable()
         {
             var newList = new DisciplineList();
             foreach (Discipline discipline in DisciplineTable.ItemsSource)
             {
                 newList.Add(discipline.Designator, discipline.Name);
             }
+            return newList;
+        }
 
-            _settings.Disciplines = newList;
+        public void Save(object sender, RoutedEventArgs e)
+        {
+            _settings.Disciplines = ExtractDisciplineListFromTable();
             _config.SaveSettings(_settings);
             DialogResult = true;
             Close();
@@ -42,25 +55,55 @@ namespace SheetDisciplines
 
         void IDropTarget.DragOver(IDropInfo dropInfo)
         {
-            Discipline sourceItem = dropInfo.Data as Discipline;
-            if (sourceItem != null)
+            if (dropInfo.Data is Discipline)
             {
                 dropInfo.DropTargetAdorner = DropTargetAdorners.Insert;
                 dropInfo.Effects = DragDropEffects.Move;
             }
-            
         }
 
         void IDropTarget.DragEnter(IDropInfo dropInfo) { }
         void IDropTarget.DragLeave(IDropInfo dropInfo) { }
         void IDropTarget.Drop(IDropInfo dropInfo) { }
 
-        void DoesNothing(object sender, RoutedEventArgs e)
+        public void Export(object sender, RoutedEventArgs e)
         {
-            var dialog = new TaskDialog("Sheet Disciplines");
-            dialog.TitleAutoPrefix = false;
-            dialog.MainInstruction = "Sorry, this button doesn't do anything.";
-            dialog.Show();
+            var dialog = new FileSaveDialog("Tab-Delimited Text Files|*.tsv|Plain Text Files|*.txt|All Files|*.*");
+            dialog.Title = "Save Sheet Disciplines File";
+
+            if (dialog.Show() == ItemSelectionDialogResult.Confirmed)
+            {
+                var modelPath = dialog.GetSelectedModelPath();
+                var path = ModelPathUtils.ConvertModelPathToUserVisiblePath(modelPath);
+                ExtractDisciplineListFromTable().WriteFile(path);
+            }
+        }
+
+        public void Import(object sender, RoutedEventArgs e)
+        {
+            var openDialog = new FileOpenDialog("Tab-Delimited Text Files|*.tsv|Plain Text Files|*.txt|All Files|*.*");
+            openDialog.Title = "Browse for Sheet Disciplines File";
+
+            if (openDialog.Show() == ItemSelectionDialogResult.Confirmed)
+            {
+                var modelPath = openDialog.GetSelectedModelPath();
+                var path = ModelPathUtils.ConvertModelPathToUserVisiblePath(modelPath);
+
+                try
+                {
+                    var disciplines = DisciplineList.FromFile(path);
+                    AssignDisciplineListToTable(disciplines);
+                }
+                catch (Exception ex)
+                {
+                    var errorDialog = new TaskDialog("Import Sheet Disciplines")
+                    {
+                        TitleAutoPrefix = false,
+                        MainInstruction = ex.ToString(),
+                    };
+                    errorDialog.Show();
+                }
+            }
         }
 
     }
